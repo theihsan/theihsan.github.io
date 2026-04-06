@@ -1,179 +1,820 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ihsan Ullah | IT Support & Network Engineer</title>
-  <meta name="description" content="Ihsan Ullah - IT Support & Network Engineer portfolio." />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ihsan Ullah — IT & Network Infrastructure Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --royal: #2251CC;
+    --royal-dark: #1a3fa3;
+    --royal-light: #3d6ee8;
+    --royal-xlight: #e8eeff;
+    --white: #ffffff;
+    --off-white: #f7f9fc;
+    --text: #0d1b3e;
+    --muted: #5a6a8a;
+    --border: #dce5f5;
+    --border-strong: #b8caf0;
+    --shadow: 0 4px 24px rgba(34,81,204,0.10);
+    --shadow-lg: 0 8px 48px rgba(34,81,204,0.16);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 5rem;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(34,81,204,0.06);
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--royal);
+    letter-spacing: 0.12em;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 2px;
+    background: var(--royal);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+    transform-origin: left;
+  }
+
+  .nav-links a:hover { color: var(--royal); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 4rem;
+    align-items: center;
+    padding: 8rem 5rem 5rem;
+    background: linear-gradient(140deg, #eef2ff 0%, #ffffff 55%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(34,81,204,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--royal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 1rem;
+    border: 1.5px solid var(--border-strong);
+    background: var(--white);
+    width: fit-content;
+  }
+
+  .hero-tag-dot {
+    width: 7px; height: 7px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.4; transform:scale(0.75); }
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.8rem, 7vw, 5.8rem);
+    line-height: 1.02;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .hero h1 em { color: var(--royal); font-style: italic; }
+
+  .hero-subtitle {
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #3d4f70;
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: var(--royal);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: var(--royal);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--royal);
+    transition: all 0.25s;
+  }
+
+  .btn-primary:hover {
+    background: var(--white);
+    color: var(--royal);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    color: var(--royal);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--border-strong);
+    transition: all 0.25s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--royal);
+    background: var(--royal-xlight);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .hero-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--royal);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--royal);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .cert-stack { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .cert-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 1rem;
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--royal);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text);
+    animation: fadeSlide 0.4s ease both;
+  }
+
+  .cert-badge:nth-child(2) { animation-delay:0.1s; }
+  .cert-badge:nth-child(3) { animation-delay:0.2s; border-left-color:var(--royal-light); }
+  .cert-badge:nth-child(4) { animation-delay:0.3s; border-left-color:var(--royal-dark); }
+  .cert-badge:nth-child(5) { animation-delay:0.4s; }
+
+  @keyframes fadeSlide {
+    from { opacity:0; transform:translateX(12px); }
+    to { opacity:1; transform:translateX(0); }
+  }
+
+  .section-wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 6rem 5rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--royal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--text);
+    margin-bottom: 3rem;
+  }
+
+  .band-white { background: var(--white); }
+  .band-gray { background: var(--off-white); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .skill-card {
+    padding: 1.8rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--royal);
+    transition: all 0.25s;
+  }
+
+  .skill-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+  }
+
+  .skill-card-icon { font-size: 1.7rem; margin-bottom: 0.9rem; }
+
+  .skill-card-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--royal);
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--royal-xlight);
+    border: 1px solid var(--border-strong);
+    color: var(--royal-dark);
+  }
+
+  .exp-timeline { position: relative; padding-left: 2rem; }
+
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--royal) 70%, transparent 100%);
+  }
+
+  .exp-item { position: relative; padding: 0 0 3.5rem 2.5rem; }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -6px; top: 6px;
+    width: 12px; height: 12px;
+    background: var(--royal);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--border-strong);
+  }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--royal);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .exp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-company {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .exp-context {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--royal);
+    margin-bottom: 1.2rem;
+    padding: 0.35rem 0.8rem;
+    background: var(--royal-xlight);
+    border: 1px solid var(--border-strong);
+  }
+
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .exp-bullets li {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: #3d4f70;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--royal);
+    font-size: 0.65rem;
+    top: 0.2rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .project-card {
+    padding: 2rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--royal), var(--royal-light));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .project-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--border-strong); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: rgba(34,81,204,0.06);
+    position: absolute;
+    top: 0.8rem; right: 1.2rem;
+    line-height: 1;
+  }
+
+  .project-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--royal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 0.7rem;
+  }
+
+  .project-desc {
+    font-size: 0.84rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .stack-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.55rem;
+    background: var(--royal-xlight);
+    border: 1px solid var(--border-strong);
+    color: var(--royal-dark);
+  }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    padding: 1.4rem 1.6rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--royal);
+    transition: all 0.2s;
+  }
+
+  .cert-card:hover { box-shadow: var(--shadow); transform: translateX(4px); }
+
+  .cert-name { font-size: 0.84rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; line-height: 1.3; }
+  .cert-issuer { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 0.9rem; }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.4rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--royal);
+    background: var(--royal-xlight);
+    transform: translateX(4px);
+    box-shadow: var(--shadow);
+  }
+
+  .contact-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .contact-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.15rem; }
+  .contact-value { font-size: 0.86rem; color: var(--text); font-weight: 600; }
+
+  .availability-box {
+    padding: 2.5rem;
+    background: var(--royal);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .availability-box::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; right: -50px;
+    width: 180px; height: 180px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .avail-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .avail-dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+
+  .avail-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .avail-desc { font-size: 0.84rem; line-height: 1.75; color: rgba(255,255,255,0.75); margin-bottom: 1.8rem; }
+
+  .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--white);
+    color: var(--royal);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--white);
+    transition: all 0.25s;
+  }
+
+  .btn-white:hover {
+    background: transparent;
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  footer span { color: #7c9ef5; }
+
+  .fade-up { opacity:0; transform:translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-card { margin-top: 2rem; }
+    .section-wrap { padding: 4rem 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand" href="#top">Ihsan Ullah</a>
-      <nav class="nav">
-        <a href="#skills">Skills</a>
-        <a href="#certs">Certifications</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+<nav>
+  <div class="nav-logo">// IHSAN ULLAH</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag"><div class="hero-tag-dot"></div>Available for opportunities · Abu Dhabi, UAE</div>
+    <h1>Ihsan<br><em>Ullah</em></h1>
+    <div class="hero-subtitle">IT & Network Infrastructure Engineer</div>
+    <p class="hero-desc">Building and securing enterprise IT infrastructure across the UAE for 6+ years. Specialising in network architecture, cloud identity, ERP systems, and workflow automation. Based in Abu Dhabi — open to opportunities across the UAE.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat-item"><div class="stat-num">40+</div><div class="stat-label">Datacenters Managed</div></div>
+      <div class="stat-item"><div class="stat-num">99%</div><div class="stat-label">Uptime Maintained</div></div>
     </div>
-  </header>
+    <div class="hero-ctas">
+      <a href="assets/Ihsan_Ullah_CV.pdf" class="btn-primary">↓ Download CV</a>
+      <a href="#contact" class="btn-secondary">Get In Touch →</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hero-card-label">// Credentials at a glance</div>
+    <div class="cert-stack">
+      <div class="cert-badge">🔒 Cisco CCNA — Networking</div>
+      <div class="cert-badge">🪟 Microsoft MCSE — Server</div>
+      <div class="cert-badge">☁️ Azure AZ-900 — Cloud</div>
+      <div class="cert-badge">🛡️ Fortinet NSE 1 & 2 — Security</div>
+      <div class="cert-badge">📍 Abu Dhabi · UAE Visa · Driving Lic.</div>
+    </div>
+  </div>
+</div>
 
-  <main id="top" class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-left">
-        <h1>Ihsan Ullah</h1>
-        <p class="subtitle">IT Support & Network Engineer</p>
+<div class="band-gray" id="skills">
+  <div class="section-wrap">
+    <div class="section-label">// 01 — Expertise</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card fade-up"><div class="skill-card-icon">🌐</div><div class="skill-card-title">Networking</div><div class="skill-tags"><span class="skill-tag">Cisco Catalyst</span><span class="skill-tag">Fortinet FortiGate</span><span class="skill-tag">Ubiquiti UniFi</span><span class="skill-tag">VLANs</span><span class="skill-tag">VPN IPSec/SSL</span><span class="skill-tag">OSPF</span><span class="skill-tag">BGP</span><span class="skill-tag">QoS</span><span class="skill-tag">Wi-Fi 6</span></div></div>
+      <div class="skill-card fade-up"><div class="skill-card-icon">🖥️</div><div class="skill-card-title">Servers & Virtualisation</div><div class="skill-tags"><span class="skill-tag">Windows Server 2019/2022</span><span class="skill-tag">Active Directory</span><span class="skill-tag">DHCP / DNS / GPO</span><span class="skill-tag">WSUS / DFS</span><span class="skill-tag">Hyper-V</span><span class="skill-tag">VMware ESXi</span></div></div>
+      <div class="skill-card fade-up"><div class="skill-card-icon">☁️</div><div class="skill-card-title">Cloud & Identity</div><div class="skill-tags"><span class="skill-tag">Microsoft Azure</span><span class="skill-tag">Azure AD / Entra ID</span><span class="skill-tag">Microsoft 365</span><span class="skill-tag">Exchange Online</span><span class="skill-tag">MFA</span><span class="skill-tag">Conditional Access</span></div></div>
+      <div class="skill-card fade-up"><div class="skill-card-icon">🔒</div><div class="skill-card-title">Security</div><div class="skill-tags"><span class="skill-tag">FortiGate Firewall</span><span class="skill-tag">Firewall Policies</span><span class="skill-tag">Network Segmentation</span><span class="skill-tag">Endpoint Security</span><span class="skill-tag">MFA Enforcement</span><span class="skill-tag">Data Wiping</span></div></div>
+      <div class="skill-card fade-up"><div class="skill-card-icon">💾</div><div class="skill-card-title">Storage & Backup</div><div class="skill-tags"><span class="skill-tag">Synology NAS</span><span class="skill-tag">QNAP NAS</span><span class="skill-tag">Veeam Backup</span><span class="skill-tag">Azure Backup</span><span class="skill-tag">RAID Config</span><span class="skill-tag">OneDrive</span></div></div>
+      <div class="skill-card fade-up"><div class="skill-card-icon">⚡</div><div class="skill-card-title">Automation & ERP</div><div class="skill-tags"><span class="skill-tag">Zapier</span><span class="skill-tag">Google Workspace</span><span class="skill-tag">Power Automate</span><span class="skill-tag">BuildSmart ERP</span><span class="skill-tag">AI/LLM Tools</span><span class="skill-tag">Workflow Design</span></div></div>
+    </div>
+  </div>
+</div>
 
-        <div class="chips">
-          <span>MikroTik</span><span>Cisco</span><span>VLANs</span><span>Routing</span><span>Wi-Fi</span><span>Windows</span>
-        </div>
-
-        <p class="about">
-          I troubleshoot and build reliable office networks: switching, VLAN segmentation, Wi-Fi coverage, printers, CCTV/NVR,
-          and Microsoft 365 support. Based in Abu Dhabi, UAE.
-        </p>
-
-        <div class="buttons">
-          <!-- Put your CV PDF in /assets/resume.pdf -->
-          <a class="btn" href="assets/resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-          <a class="btn ghost" href="https://github.com/theihsan" target="_blank" rel="noopener">GitHub</a>
-          <!-- Replace with your LinkedIn -->
-          <a class="btn ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn ghost" href="#contact">Contact</a>
-        </div>
+<div class="band-white" id="experience">
+  <div class="section-wrap">
+    <div class="section-label">// 02 — Career</div>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="exp-timeline">
+      <div class="exp-item fade-up">
+        <div class="exp-date">OCT 2025 — PRESENT</div>
+        <div class="exp-title">IT Engineer</div>
+        <div class="exp-company">Ultraction General Contracting LLC · Abu Dhabi, UAE</div>
+        <div class="exp-context">General contracting · Multi-site operations · 80+ users</div>
+        <ul class="exp-bullets">
+          <li>Manage end-to-end IT infrastructure across 3+ sites including servers, Cisco/HP switches, Fortinet firewalls, APs, VoIP, and CCTV — maintaining 99%+ uptime.</li>
+          <li>Administer Microsoft 365, Azure AD, and Exchange Online for 80+ users including MFA rollout and conditional access policy enforcement.</li>
+          <li>Designed and deployed NAS-based backup architecture with local and cloud replication, reducing data recovery time by 35%.</li>
+          <li>Built automated staff reporting pipeline using Google Forms + Zapier, eliminating all manual reporting effort for management.</li>
+          <li>Led AI/LLM workflow automation implementation, reducing manual processing time across key operations by ~30%.</li>
+          <li>Support and maintain BuildSmart RIB ERP across all business units with vendor coordination.</li>
+          <li>Provide escalated L2/L3 support for all network, server, and infrastructure issues.</li>
+        </ul>
       </div>
-
-      <div class="hero-right">
-        <!-- Put your photo in /assets/profile.jpg -->
-        <img class="avatar" src="assets/profile.jpg" alt="Profile photo" />
-        <div class="meta">
-          <div>📍 Abu Dhabi, UAE</div>
-          <div>🛠️ 6+ years IT Support & Networking</div>
-          <div>✅ Available for opportunities</div>
-        </div>
+      <div class="exp-item fade-up">
+        <div class="exp-date">DEC 2023 — SEP 2025</div>
+        <div class="exp-title">IT Support Engineer</div>
+        <div class="exp-company">Segments Cloud Computing LLC · Abu Dhabi, UAE</div>
+        <div class="exp-context">Large-scale data centre operations · 40+ high-density facilities</div>
+        <ul class="exp-bullets">
+          <li>Managed network infrastructure across 40+ datacenter facilities — one of the largest data centre footprints in Abu Dhabi.</li>
+          <li>Configured and maintained switches, routers, and firewalls across all sites, reducing client-reported incidents by 25%.</li>
+          <li>Planned and deployed CCTV systems with VPN integration for centralised remote monitoring and secure network segmentation.</li>
+          <li>Coordinated ISP circuit provisioning, fault escalation, and SLA-compliant service restoration across all client sites.</li>
+          <li>Maintained up-to-date network topology documentation and conducted preventive maintenance across all facilities.</li>
+        </ul>
       </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="card">
-      <h2>Skills</h2>
-      <div class="grid">
-        <div class="tile">
-          <h3>Networking</h3>
-          <ul>
-            <li>VLANs, trunk/access ports</li>
-            <li>DHCP, routing basics</li>
-            <li>Switching (Cisco/Aruba/MikroTik)</li>
-          </ul>
-        </div>
-        <div class="tile">
-          <h3>Wi-Fi</h3>
-          <ul>
-            <li>AP deployment & coverage</li>
-            <li>SSID design (data/voice)</li>
-            <li>Troubleshooting & optimization</li>
-          </ul>
-        </div>
-        <div class="tile">
-          <h3>IT Support</h3>
-          <ul>
-            <li>Windows, printers, user support</li>
-            <li>Microsoft 365 / OneDrive issues</li>
-            <li>Documentation & SOPs</li>
-          </ul>
-        </div>
-        <div class="tile">
-          <h3>Systems</h3>
-          <ul>
-            <li>CCTV/NVR basics</li>
-            <li>NAS / storage handling</li>
-            <li>Basic security best practices</li>
-          </ul>
-        </div>
+      <div class="exp-item fade-up">
+        <div class="exp-date">JAN 2019 — OCT 2023</div>
+        <div class="exp-title">IT Support Specialist</div>
+        <div class="exp-company">Websterz · Sialkot, Pakistan</div>
+        <div class="exp-context">IT services & consultancy · SME client base</div>
+        <ul class="exp-bullets">
+          <li>Delivered L1/L2 technical support in-person and remotely for hardware, software, OS, and network issues.</li>
+          <li>Performed hardware upgrades, OS installations, virus/malware removal, and system reconfigurations.</li>
+          <li>Managed IT hardware inventory and delivered user training on software and cybersecurity best practices.</li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </div>
+</div>
 
-    <!-- CERTIFICATIONS -->
-    <section id="certs" class="card">
-      <h2>Certifications</h2>
-      <p class="muted">Add PDFs inside <code>/assets</code> and update links below.</p>
-
-      <div class="grid">
-        <div class="tile">
-          <h3>Certification Name</h3>
-          <p class="muted">Provider • Year</p>
-          <a class="link" href="assets/cert-1.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="tile">
-          <h3>Certification Name</h3>
-          <p class="muted">Provider • Year</p>
-          <a class="link" href="assets/cert-2.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
+<div class="band-gray" id="projects">
+  <div class="section-wrap">
+    <div class="section-label">// 03 — Projects</div>
+    <h2 class="section-title">Key Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card fade-up">
+        <div class="project-number">01</div>
+        <div class="project-tag">Automation · Workflow</div>
+        <div class="project-title">Automated Staff Reporting Pipeline</div>
+        <p class="project-desc">Designed and implemented an end-to-end automated reporting system using Google Forms for data capture, integrated with Zapier to trigger automatic email reports to management — eliminating all manual reporting effort.</p>
+        <div class="project-stack"><span class="stack-tag">Google Forms</span><span class="stack-tag">Zapier</span><span class="stack-tag">Email Automation</span><span class="stack-tag">Workflow Design</span></div>
       </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="card">
-      <h2>Experience</h2>
-
-      <div class="timeline">
-        <div class="role">
-          <div class="role-head">
-            <h3>IT Support / Network Engineer</h3>
-            <span class="tag">UAE</span>
-          </div>
-          <p class="muted">Company Name • 20XX – Present</p>
-          <ul>
-            <li>Resolved end-user issues (Windows, printers, M365) with clear documentation.</li>
-            <li>Configured VLANs, switches, and Wi-Fi segmentation for data/voice devices.</li>
-            <li>Supported CCTV/NVR, NAS, and office IT operations.</li>
-          </ul>
-        </div>
+      <div class="project-card fade-up">
+        <div class="project-number">02</div>
+        <div class="project-tag">Infrastructure · Backup</div>
+        <div class="project-title">Multi-Site NAS Backup Architecture</div>
+        <p class="project-desc">Designed and deployed a NAS-based backup system with local and cloud replication across 3 office locations, achieving near-100% backup success rate and reducing data recovery time by 35%.</p>
+        <div class="project-stack"><span class="stack-tag">Synology NAS</span><span class="stack-tag">Veeam</span><span class="stack-tag">Azure Backup</span><span class="stack-tag">RAID</span></div>
       </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="card">
-      <h2>Projects</h2>
-
-      <div class="grid">
-        <div class="tile">
-          <h3>Office VLAN + Wi-Fi Design</h3>
-          <p class="muted">RB5009 / CRS / APs • Data + Voice segmentation</p>
-          <a class="link" href="https://github.com/theihsan" target="_blank" rel="noopener">View on GitHub</a>
-        </div>
-        <div class="tile">
-          <h3>Wi-Fi Coverage Planning</h3>
-          <p class="muted">Small office layout planning + AP placement</p>
-          <a class="link" href="#" target="_blank" rel="noopener">Details</a>
-        </div>
+      <div class="project-card fade-up">
+        <div class="project-number">03</div>
+        <div class="project-tag">Network · Security</div>
+        <div class="project-title">40+ Datacenter Network Management</div>
+        <p class="project-desc">Managed and maintained network infrastructure across 40+ high-density datacenter facilities in Abu Dhabi — including firewall management, VLAN segmentation, VPN integration, and centralised CCTV monitoring.</p>
+        <div class="project-stack"><span class="stack-tag">Fortinet FortiGate</span><span class="stack-tag">Cisco</span><span class="stack-tag">VPN</span><span class="stack-tag">CCTV</span><span class="stack-tag">VLANs</span></div>
       </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="card">
-      <h2>Contact</h2>
-      <div class="contact">
-        <a class="btn ghost" href="mailto:you@email.com">you@email.com</a>
-        <a class="btn ghost" href="https://github.com/theihsan" target="_blank" rel="noopener">github.com/theihsan</a>
-        <!-- Replace with LinkedIn -->
-        <a class="btn ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <div class="project-card fade-up">
+        <div class="project-number">04</div>
+        <div class="project-tag">Cloud · Identity</div>
+        <div class="project-title">Microsoft 365 & Azure AD Deployment</div>
+        <p class="project-desc">Administered full Microsoft 365 and Azure AD environment for 80+ users — MFA rollout, conditional access policies, Exchange Online, SharePoint, and complete user lifecycle management across multiple sites.</p>
+        <div class="project-stack"><span class="stack-tag">Azure AD</span><span class="stack-tag">Microsoft 365</span><span class="stack-tag">MFA</span><span class="stack-tag">Exchange Online</span></div>
       </div>
-      <p class="muted small">Tip: Update your email + LinkedIn link above.</p>
-    </section>
+    </div>
+  </div>
+</div>
 
-    <footer class="footer">
-      <span>© <span id="year"></span> Ihsan Ullah</span>
-    </footer>
-  </main>
+<div class="band-white" id="certifications">
+  <div class="section-wrap">
+    <div class="section-label">// 04 — Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="certs-grid">
+      <div class="cert-card fade-up"><div class="cert-name">Cisco Certified Network Associate (CCNA)</div><div class="cert-issuer">Cisco Systems / Netcom Trainings</div></div>
+      <div class="cert-card fade-up"><div class="cert-name">Microsoft Certified Solutions Expert (MCSE)</div><div class="cert-issuer">Microsoft / Netcom Trainings</div></div>
+      <div class="cert-card fade-up"><div class="cert-name">Microsoft Azure Fundamentals (AZ-900)</div><div class="cert-issuer">Microsoft / Netcom Trainings</div></div>
+      <div class="cert-card fade-up"><div class="cert-name">Fortinet Network Security Associate NSE 1 & NSE 2</div><div class="cert-issuer">Fortinet</div></div>
+      <div class="cert-card fade-up"><div class="cert-name">Computer Hardware Technician</div><div class="cert-issuer">Allama Iqbal Technical Education Centre</div></div>
+      <div class="cert-card fade-up"><div class="cert-name">CCTV Planning & Installation</div><div class="cert-issuer">Netcom Trainings</div></div>
+      <div class="cert-card fade-up" style="border-left-color:#f59e0b;"><div class="cert-name" style="color:#b45309;">Currently Pursuing</div><div class="cert-issuer">AZ-104 Azure Administrator · CCNP Enterprise</div></div>
+    </div>
+  </div>
+</div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<div class="band-gray" id="contact">
+  <div class="section-wrap">
+    <div class="section-label">// 05 — Contact</div>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a href="tel:+971567292469" class="contact-item"><span class="contact-icon">📞</span><div><div class="contact-label">Phone</div><div class="contact-value">+971 567 292 469</div></div></a>
+        <a href="mailto:ihsan.ullah@gmail.com" class="contact-item"><span class="contact-icon">✉️</span><div><div class="contact-label">Email</div><div class="contact-value">ihsan.ullah@gmail.com</div></div></a>
+        <a href="https://linkedin.com/in/ihsanullah" target="_blank" class="contact-item"><span class="contact-icon">💼</span><div><div class="contact-label">LinkedIn</div><div class="contact-value">linkedin.com/in/ihsanullah</div></div></a>
+        <a href="https://github.com/theihsan" target="_blank" class="contact-item"><span class="contact-icon">🐙</span><div><div class="contact-label">GitHub</div><div class="contact-value">github.com/theihsan</div></div></a>
+        <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Location</div><div class="contact-value">Abu Dhabi, UAE · Residence Visa · Driving Lic.</div></div></div>
+      </div>
+      <div class="availability-box">
+        <div class="avail-status"><div class="avail-dot"></div>Open to Opportunities</div>
+        <div class="avail-title">Let's build something reliable together.</div>
+        <p class="avail-desc">I'm currently open to IT Infrastructure, Network Engineering, and Systems Administrator roles across the UAE. Available for on-site or hybrid positions in Abu Dhabi, Dubai, and across the Emirates.</p>
+        <a href="assets/Ihsan_Ullah_CV.pdf" class="btn-white">↓ Download My CV</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 <span>Ihsan Ullah</span> · IT & Network Infrastructure Engineer · Abu Dhabi, UAE</p></footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 90);
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
