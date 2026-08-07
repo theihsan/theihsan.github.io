@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Multi-Site Network Reliability — Ihsan Ullah</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/main.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#case-studies" class="active">Case Studies</a></li>
+    <li><a href="../technical-work.html">Technical Work</a></li>
+    <li><a href="../index.html#certifications">Certifications</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="cs-header">
+  <div class="cs-header-inner">
+    <a href="../index.html#case-studies" class="cs-back">← All Case Studies</a>
+    <div class="cs-tags"><span class="tag tag-production">Production</span></div>
+    <h1 class="cs-title">Multi-Site Network Reliability</h1>
+    <div class="cs-meta">Ultraction General Contracting LLC · Abu Dhabi, UAE · Network &amp; Remote Access</div>
+  </div>
+</div>
+
+<div class="cs-section" style="border-top:none;">
+  <div class="cs-section-num">01 — Context &amp; Problem</div>
+  <div class="cs-section-title">A remote-access path that looked healthy wasn't</div>
+  <p>A mesh-style remote-access layer is used across the organization's multi-site network to let authorized devices reach shared file storage between offices. This access path began silently failing — the affected devices showed a normal "Connected" state, with no error, no alert, and no obvious symptom pointing to the cause.</p>
+  <p>Separately, the same period involved consolidating a fragmented Wi-Fi SSID setup that had grown inconsistently across sites, which is covered under Implementation below.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">02 — Environment</div>
+  <div class="cs-section-title">Multi-site network, sole ownership</div>
+  <p>Multi-site MikroTik-based network infrastructure across 3+ locations, with a mesh VPN layer used specifically for inter-office file sharing. All network and remote-access configuration is owned solely, with no dedicated network team or second-line escalation.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">03 — My Responsibility</div>
+  <div class="cs-section-title">Full ownership of network and remote-access configuration</div>
+  <p>As the sole owner of this infrastructure, diagnosing and resolving the fault — end to end, from initial report through root cause to validated fix — was entirely my responsibility. There was no network team to hand this off to.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">04 — Investigation</div>
+  <div class="cs-section-title">Ruling out the obvious explanation first</div>
+  <p>The mesh dashboard showed every affected peer as <strong>Connected</strong> — the standard first thing to check when remote access fails, and it gave no indication of a problem. Because the fault affected multiple, unrelated devices identically, client-side configuration was ruled out early: a per-device issue doesn't produce an identical symptom across an entire device set. That pointed the investigation toward something shared — a policy or network-level cause rather than an endpoint problem.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">05 — Root Cause</div>
+  <div class="cs-section-title">A connected state with an empty access policy</div>
+  <p>The mesh network's access-control policy file had an <strong>empty grants array</strong>. With no explicit grants defined, the policy engine defaulted to deny-all — meaning every peer could establish a connection at the transport level (hence "Connected") while being denied at the authorization level. The connection status and the authorization state were two separate things, and only one of them was visible on the dashboard.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">06 — Architecture / Design</div>
+  <div class="cs-section-title">Where the failure actually sat</div>
+  <div class="diagram-box">
+    <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; font-family:'DM Mono',monospace;">
+      <rect x="20" y="80" width="150" height="60" fill="#ffffff" stroke="#b8caf0" stroke-width="1.5"/>
+      <text x="95" y="105" text-anchor="middle" font-size="11" fill="#0d1b3e" font-weight="600">Client Device</text>
+      <text x="95" y="122" text-anchor="middle" font-size="9" fill="#5a6a8a">requests peer link</text>
+
+      <line x1="170" y1="110" x2="230" y2="110" stroke="#2251CC" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <rect x="230" y="80" width="170" height="60" fill="#e8eeff" stroke="#2251CC" stroke-width="1.5"/>
+      <text x="315" y="102" text-anchor="middle" font-size="11" fill="#0d1b3e" font-weight="600">Mesh Registers Peer</text>
+      <text x="315" y="119" text-anchor="middle" font-size="9" fill="#1a3fa3">status: "Connected"</text>
+      <text x="315" y="132" text-anchor="middle" font-size="8" fill="#5a6a8a">(transport layer only)</text>
+
+      <line x1="400" y1="110" x2="460" y2="110" stroke="#2251CC" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <rect x="460" y="80" width="170" height="60" fill="#fef3e2" stroke="#b45309" stroke-width="1.5"/>
+      <text x="545" y="102" text-anchor="middle" font-size="11" fill="#0d1b3e" font-weight="600">Policy Engine</text>
+      <text x="545" y="119" text-anchor="middle" font-size="9" fill="#b45309" font-weight="600">grants: [ ] (empty)</text>
+      <text x="545" y="132" text-anchor="middle" font-size="8" fill="#5a6a8a">→ implicit deny-all</text>
+
+      <line x1="630" y1="110" x2="690" y2="110" stroke="#b45309" stroke-width="1.5" marker-end="url(#arrowred)"/>
+      <text x="710" y="105" text-anchor="middle" font-size="16" fill="#b45309">✕</text>
+      <text x="710" y="122" text-anchor="middle" font-size="8" fill="#b45309">no traffic</text>
+
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2251CC"/></marker>
+        <marker id="arrowred" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b45309"/></marker>
+      </defs>
+
+      <text x="380" y="190" text-anchor="middle" font-size="9.5" fill="#5a6a8a">The dashboard only surfaces the middle step (connection status) — not the policy evaluation that actually gates traffic.</text>
+    </svg>
+    <div class="diagram-caption">FIG. 1 — ACCESS EVALUATION FLOW (SCHEMATIC, RECONSTRUCTED FROM THE INCIDENT)</div>
+  </div>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">07 — Implementation</div>
+  <div class="cs-section-title">Restoring the correct grant, then addressing the wider Wi-Fi layout</div>
+  <ul>
+    <li>Restored the correct access grant in the mesh policy configuration, re-establishing the intended traffic path between authorized peers.</li>
+    <li>Separately, consolidated a fragmented Wi-Fi SSID structure that had accumulated inconsistently across multiple sites into a single, simplified structure, and resolved DFS channel conflicts that were affecting coverage.</li>
+  </ul>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">08 — Security Considerations</div>
+  <div class="cs-section-title">Restoring access deliberately, not broadly</div>
+  <p>The fix was scoped to restore exactly the access that was intended — not to open broader permissions as a shortcut. This incident is also a useful reminder in itself: a "Connected" status is not proof of authorized access, and access-control policy needs to be checked independently of connection state during any similar investigation going forward.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">09 — Validation</div>
+  <div class="cs-section-title">Confirmed at the traffic level, not the status level</div>
+  <p>Given that the original symptom was a healthy-looking status hiding a real fault, validation didn't stop at checking the dashboard again — it required confirming actual file-sharing traffic flowed correctly between the previously affected peers post-fix, with access scoped to exactly what was restored.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">10 — Result</div>
+  <div class="cs-section-title">Access restored, coverage simplified</div>
+  <p>Remote file-sharing access was restored without extended downtime for the affected offices. The Wi-Fi SSID consolidation that followed improved coverage consistency across sites by removing the channel conflicts and structural sprawl that had built up over time.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">11 — Evidence</div>
+  <div class="cs-section-title">What's shown here</div>
+  <p>The diagram above is a schematic reconstruction of the access-evaluation flow involved in this incident, built to illustrate where the failure actually occurred — it is not a screenshot of the production policy console or dashboard, and contains no real IP addresses, hostnames, or configuration values.</p>
+</div>
+
+<div class="cs-nav-footer">
+  <a href="../case-studies/vendor-integration.html">← Vendor Integration &amp; Testing</a>
+  <a href="../case-studies/backup-dr.html">NAS Backup &amp; Disaster Recovery →</a>
+</div>
+
+<footer><p>© 2026 <span>Ihsan Ullah</span> · IT Infrastructure Engineer | Network Engineer | Microsoft 365 Administrator · Abu Dhabi, UAE</p></footer>
+
+</body>
+</html>

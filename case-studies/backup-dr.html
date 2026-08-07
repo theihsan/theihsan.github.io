@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NAS Backup &amp; Disaster Recovery — Ihsan Ullah</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/main.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#case-studies" class="active">Case Studies</a></li>
+    <li><a href="../technical-work.html">Technical Work</a></li>
+    <li><a href="../index.html#certifications">Certifications</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="cs-header">
+  <div class="cs-header-inner">
+    <a href="../index.html#case-studies" class="cs-back">← All Case Studies</a>
+    <div class="cs-tags"><span class="tag tag-production">Production</span></div>
+    <h1 class="cs-title">NAS Backup &amp; Disaster Recovery</h1>
+    <div class="cs-meta">Ultraction General Contracting LLC · Abu Dhabi, UAE · Infrastructure &amp; Resilience</div>
+  </div>
+</div>
+
+<div class="cs-section" style="border-top:none;">
+  <div class="cs-section-num">01 — Context &amp; Problem</div>
+  <div class="cs-section-title">Backup coverage needed a meaningfully faster recovery path</div>
+  <p>The organization needed resilient backup coverage with a materially lower recovery time than the existing approach allowed. Alongside this, a live shared-storage access fault needed resolving — a shared folder was reachable at its top level but denied specific users access to particular subfolders.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">02 — Environment</div>
+  <div class="cs-section-title">Synology NAS platform, local and cloud replication</div>
+  <p>A Synology NAS platform serving as the organization's primary backup target, configured with both local and cloud replication across the multi-site operation. The same platform also hosts a virtual machine used for an internal service.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">03 — My Responsibility</div>
+  <div class="cs-section-title">End-to-end ownership of the backup platform</div>
+  <p>Designed and implemented the backup architecture, and own the NAS platform end-to-end — including the permissions structure, replication configuration, and the hosted VM's exposure model.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">04 — Investigation</div>
+  <div class="cs-section-title">Access worked at the top level, broke on subfolders</div>
+  <p>Users could reach a shared folder's top level without issue, but access was denied on specific subfolders for the same users — a pattern that pointed toward a permissions-inheritance problem rather than a straightforward access-grant issue, since the same users were being treated inconsistently within the same share.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">05 — Root Cause</div>
+  <div class="cs-section-title">A share-level and folder-level ACL mismatch</div>
+  <p>The root cause was a mismatch between share-level and folder-level permission inheritance — subfolder ACLs were not correctly inheriting from the parent share's permission set, producing the exact symptom seen: consistent access at the top, inconsistent access below it.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">06 — Architecture / Design</div>
+  <div class="cs-section-title">Backup topology</div>
+  <div class="diagram-box">
+    <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; font-family:'DM Mono',monospace;">
+      <rect x="20" y="70" width="160" height="60" fill="#ffffff" stroke="#b8caf0" stroke-width="1.5"/>
+      <text x="100" y="95" text-anchor="middle" font-size="11" fill="#0d1b3e" font-weight="600">Production Data</text>
+      <text x="100" y="112" text-anchor="middle" font-size="8.5" fill="#5a6a8a">multi-site sources</text>
+
+      <line x1="180" y1="100" x2="240" y2="100" stroke="#2251CC" stroke-width="1.5" marker-end="url(#b1)"/>
+
+      <rect x="240" y="70" width="160" height="60" fill="#e8eeff" stroke="#2251CC" stroke-width="1.5"/>
+      <text x="320" y="92" text-anchor="middle" font-size="11" fill="#0d1b3e" font-weight="600">Local NAS</text>
+      <text x="320" y="108" text-anchor="middle" font-size="8.5" fill="#1a3fa3">primary backup target</text>
+      <text x="320" y="121" text-anchor="middle" font-size="8" fill="#5a6a8a">(Synology)</text>
+
+      <line x1="400" y1="100" x2="460" y2="100" stroke="#2251CC" stroke-width="1.5" marker-end="url(#b1)"/>
+
+      <rect x="460" y="70" width="160" height="60" fill="#e8eeff" stroke="#2251CC" stroke-width="1.5"/>
+      <text x="540" y="92" text-anchor="middle" font-size="11" fill="#0d1b3e" font-weight="600">Cloud Replication</text>
+      <text x="540" y="108" text-anchor="middle" font-size="8.5" fill="#1a3fa3">secondary / off-site</text>
+
+      <line x1="620" y1="100" x2="680" y2="100" stroke="#2251CC" stroke-width="1.5" marker-end="url(#b1)"/>
+
+      <rect x="640" y="20" width="1" height="1" fill="none"/>
+      <text x="700" y="90" text-anchor="middle" font-size="10.5" fill="#0d1b3e" font-weight="600">Recovery</text>
+      <text x="700" y="105" text-anchor="middle" font-size="8" fill="#5a6a8a">Path</text>
+
+      <defs><marker id="b1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2251CC"/></marker></defs>
+
+      <text x="380" y="170" text-anchor="middle" font-size="9.5" fill="#5a6a8a">Local-plus-cloud replication means recovery doesn't depend on a single site being reachable.</text>
+    </svg>
+    <div class="diagram-caption">FIG. 1 — BACKUP TOPOLOGY (SCHEMATIC)</div>
+  </div>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">07 — Implementation</div>
+  <div class="cs-section-title">Backup architecture, plus a deliberate exposure decision</div>
+  <ul>
+    <li>Implemented NAS-based backup with local and cloud replication as the recovery path for production data.</li>
+    <li>Corrected the share-level and folder-level ACL configuration so subfolder permissions correctly inherit from the parent share.</li>
+    <li>Separately, the VM hosted on the same NAS platform is made reachable through an outbound tunnel rather than any open inbound ports — see Security Considerations below.</li>
+  </ul>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">08 — Security Considerations</div>
+  <div class="cs-section-title">Tunnel-based reachability over open ports</div>
+  <p>The VM hosted on the backup platform needed to be reachable for an internal service, without exposing the NAS to inbound connections from the internet. Rather than forwarding inbound ports — the more common but higher-exposure approach — it's made reachable through an outbound tunnel, so the platform holding the organization's backups never has an open inbound port as an attack surface.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">09 — Validation</div>
+  <div class="cs-section-title">Backup success rate, not just job completion</div>
+  <p>Backup jobs were tracked for actual completion success rather than assumed from a scheduled-job status, reaching a near-100% success rate. The ACL fix was validated by confirming consistent access at both the share and subfolder level for the affected users.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">10 — Result</div>
+  <div class="cs-section-title">35% faster recovery, near-100% success rate</div>
+  <p>The rearchitected backup approach reduced data recovery time by <strong>35%</strong> compared to the prior approach, while maintaining a near-100% backup success rate.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">11 — Evidence</div>
+  <div class="cs-section-title">What's shown here</div>
+  <p>The topology diagram above is a schematic representation of the backup architecture — it illustrates the data-flow design, not a screenshot of the production NAS console, and contains no real hostnames, IP addresses, or share names.</p>
+</div>
+
+<div class="cs-nav-footer">
+  <a href="../case-studies/network-reliability.html">← Multi-Site Network Reliability</a>
+  <a href="../case-studies/vendor-integration.html">Vendor Integration &amp; Testing →</a>
+</div>
+
+<footer><p>© 2026 <span>Ihsan Ullah</span> · IT Infrastructure Engineer | Network Engineer | Microsoft 365 Administrator · Abu Dhabi, UAE</p></footer>
+
+</body>
+</html>

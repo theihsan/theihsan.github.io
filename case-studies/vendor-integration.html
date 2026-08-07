@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Third-Party Platform — Structured Verification — Ihsan Ullah</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/main.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#case-studies" class="active">Case Studies</a></li>
+    <li><a href="../technical-work.html">Technical Work</a></li>
+    <li><a href="../index.html#certifications">Certifications</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="cs-header">
+  <div class="cs-header-inner">
+    <a href="../index.html#case-studies" class="cs-back">← All Case Studies</a>
+    <div class="cs-tags"><span class="tag tag-production">Production</span></div>
+    <h1 class="cs-title">Third-Party AI &amp; Attendance Platform — Structured Verification</h1>
+    <div class="cs-meta">Ultraction General Contracting LLC · Abu Dhabi, UAE · Vendor Accountability &amp; Testing</div>
+  </div>
+</div>
+
+<div class="cs-section" style="border-top:none;">
+  <div class="cs-section-num">01 — Context &amp; Problem</div>
+  <div class="cs-section-title">A vendor's claims needed independent verification</div>
+  <p>The organization onboarded a third-party platform combining AI-assisted email handling with an attendance-tracking integration. Rather than accepting the vendor's feature claims at face value once delivered, a structured verification process was needed to confirm that what was promised actually matched what was delivered — and to hold the vendor to fixing what didn't.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">02 — Environment</div>
+  <div class="cs-section-title">Two integrated modules, one Microsoft 365 environment</div>
+  <p>The platform integrated with the organization's Microsoft 365 environment across two modules: an AI-assisted email-handling layer, and an attendance-tracking integration. Both modules were new to the organization and had no prior internal usage history to benchmark against.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">03 — My Responsibility</div>
+  <div class="cs-section-title">Contract risk review, formal testing, and accountability tracking</div>
+  <p>Ahead of rollout, I reviewed the vendor's professional services agreement for risk and flagged concerns around intellectual-property ownership terms and an incomplete deliverables schedule. Once the platform was delivered, I authored formal, itemized testing remarks against each promised capability, tracked the vendor's response to every item, and independently re-verified each claimed fix across multiple rounds rather than accepting the vendor's own changelog.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">04 — Investigation</div>
+  <div class="cs-section-title">Testing against the promised feature set, item by item</div>
+  <p>Initial testing was structured around the platform's stated capabilities: for the Email AI module, this covered flagged-email handling, date filtering, thread-context retention, document retrieval, sent-item visibility, attachment handling, intelligent routing, a stated 25MB knowledge-base limit, and in-dashboard email management actions. For the attendance module, this covered average-working-hours calculation and attendance-abnormality detection.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">05 — Root Cause / Findings</div>
+  <div class="cs-section-title">"Accepted" didn't always mean fixed</div>
+  <p>The vendor classified each submitted item as Accepted, Partially Accepted, or Not Planned. On follow-up verification, several items marked "Accepted" were still failing in practice — document retrieval returned a "no original file stored" error, attachments weren't visible in the interface at all, intelligent routing wasn't present in the UI despite being marked resolved, and a knowledge-base upload limit stated as 200MB in the dashboard actually failed on an 85MB file.</p>
+  <p>That same verification pass also surfaced defects outside the original test scope — reply-all silently dropping recipients, the AI agent showing no persistent memory of prior corrections, and the compose interface losing cursor focus after every message sent.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">06 — Architecture / Design</div>
+  <div class="cs-section-title">The verification cycle</div>
+  <div class="diagram-box">
+    <svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; font-family:'DM Mono',monospace;">
+      <rect x="30" y="30" width="150" height="55" fill="#e8eeff" stroke="#2251CC" stroke-width="1.5"/>
+      <text x="105" y="53" text-anchor="middle" font-size="10.5" fill="#0d1b3e" font-weight="600">Submit Testing</text>
+      <text x="105" y="68" text-anchor="middle" font-size="10.5" fill="#0d1b3e" font-weight="600">Remarks</text>
+
+      <rect x="305" y="30" width="150" height="55" fill="#ffffff" stroke="#b8caf0" stroke-width="1.5"/>
+      <text x="380" y="53" text-anchor="middle" font-size="10.5" fill="#0d1b3e" font-weight="600">Vendor Triage</text>
+      <text x="380" y="68" text-anchor="middle" font-size="8.5" fill="#5a6a8a">Accepted / Partial / Not Planned</text>
+
+      <rect x="580" y="30" width="150" height="55" fill="#ffffff" stroke="#b8caf0" stroke-width="1.5"/>
+      <text x="655" y="53" text-anchor="middle" font-size="10.5" fill="#0d1b3e" font-weight="600">Fix Round</text>
+      <text x="655" y="68" text-anchor="middle" font-size="8.5" fill="#5a6a8a">vendor delivers changes</text>
+
+      <rect x="305" y="160" width="150" height="55" fill="#fef3e2" stroke="#b45309" stroke-width="1.5"/>
+      <text x="380" y="183" text-anchor="middle" font-size="10.5" fill="#0d1b3e" font-weight="600">Re-Verify</text>
+      <text x="380" y="198" text-anchor="middle" font-size="8.5" fill="#b45309">independently re-tested</text>
+
+      <line x1="180" y1="57" x2="305" y2="57" stroke="#2251CC" stroke-width="1.5" marker-end="url(#a1)"/>
+      <line x1="455" y1="57" x2="580" y2="57" stroke="#2251CC" stroke-width="1.5" marker-end="url(#a1)"/>
+      <line x1="655" y1="85" x2="655" y2="187" stroke="#2251CC" stroke-width="1.5"/>
+      <line x1="655" y1="187" x2="455" y2="187" stroke="#2251CC" stroke-width="1.5" marker-end="url(#a1)"/>
+      <line x1="380" y1="160" x2="380" y2="85" stroke="#b45309" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#a2)"/>
+      <text x="410" y="125" font-size="8.5" fill="#b45309">if still failing</text>
+
+      <defs>
+        <marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2251CC"/></marker>
+        <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b45309"/></marker>
+      </defs>
+
+      <text x="380" y="245" text-anchor="middle" font-size="9.5" fill="#5a6a8a">Each cycle re-tested the original requirement directly — a vendor changelog entry was never treated as proof on its own.</text>
+    </svg>
+    <div class="diagram-caption">FIG. 1 — VERIFICATION CYCLE (SCHEMATIC, REPRESENTING THE ACTUAL PROCESS FOLLOWED)</div>
+  </div>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">07 — Verification Rounds</div>
+  <div class="cs-section-title">What closed, what stayed open</div>
+  <p>A fix round delivered by the vendor was independently re-verified in the following cycle. Resolved in that pass: flagged-email indicators, date filtering, knowledge-base upload and retrieval, intelligent routing, reply-all recipient handling, attachment visibility, and the compose-focus issue. Still open at the close of this cycle: attachment content summarization had no assigned milestone, and two further items — external-mail segregation and persistent agent memory — were explicitly deferred by the vendor to a later delivery milestone rather than resolved.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">08 — Security Considerations</div>
+  <div class="cs-section-title">Contract-level risk, reviewed before rollout</div>
+  <p>Before the platform was accepted, the professional services agreement itself was reviewed for risk — specifically intellectual-property ownership language and an incomplete deliverables schedule — and flagged as concerns ahead of commitment, treating vendor risk as more than a purely technical question.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">09 — Validation</div>
+  <div class="cs-section-title">Nothing marked closed without independent re-testing</div>
+  <p>Every item the vendor reported as resolved was checked directly against the original requirement before being accepted as closed. This is what caught the gap between the vendor's "Accepted" classification and what was actually delivered in the first verification round.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">10 — Result</div>
+  <div class="cs-section-title">From unverified claims to a tracked, largely-resolved state</div>
+  <p>The platform moved from a set of unverified vendor claims to a tracked, itemized state where the large majority of raised issues were independently confirmed as resolved, and the remaining gaps were explicitly identified and deferred to a defined milestone rather than silently dropped or left ambiguous.</p>
+</div>
+
+<div class="cs-section">
+  <div class="cs-section-num">11 — Evidence</div>
+  <div class="cs-section-title">What's shown here</div>
+  <p>The verification-cycle diagram above illustrates the actual process followed across this engagement. The vendor's name, the platform's name, and all commercial and contract terms are withheld — this case study is scoped to the verification methodology and findings, not the vendor relationship itself.</p>
+</div>
+
+<div class="cs-nav-footer">
+  <a href="../case-studies/backup-dr.html">← NAS Backup &amp; Disaster Recovery</a>
+  <a href="../case-studies/network-reliability.html">Multi-Site Network Reliability →</a>
+</div>
+
+<footer><p>© 2026 <span>Ihsan Ullah</span> · IT Infrastructure Engineer | Network Engineer | Microsoft 365 Administrator · Abu Dhabi, UAE</p></footer>
+
+</body>
+</html>
