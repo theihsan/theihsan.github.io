@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Technical Work — Ihsan Ullah</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/main.css"/>
+<style>
+  .tw-header { padding: 9rem 5rem 3rem; background: linear-gradient(140deg, #eef2ff 0%, #ffffff 60%); }
+  .tw-header-inner { max-width: 980px; margin: 0 auto; }
+  .tw-header h1 { font-family: 'DM Serif Display', serif; font-size: 2.3rem; margin-bottom: 0.8rem; }
+  .tw-header p { font-size: 0.95rem; color: var(--muted); max-width: 620px; line-height: 1.7; }
+
+  .tw-category { max-width: 980px; margin: 0 auto; padding: 3.5rem 3rem; border-top: 1px solid var(--border); }
+  .tw-cat-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.6rem; flex-wrap: wrap; gap: 1rem; }
+  .tw-cat-title { font-family: 'DM Serif Display', serif; font-size: 1.7rem; }
+  .tw-cat-tech-list { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.4rem; }
+
+  .evidence-block { background: var(--off-white); border-left: 3px solid var(--royal); padding: 1.4rem 1.6rem; margin-top: 1rem; }
+  .evidence-block-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--royal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .evidence-block p { font-size: 0.88rem; line-height: 1.75; color: var(--text); margin-bottom: 0.8rem; }
+  .evidence-block a { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--royal); text-decoration: none; font-weight: 700; }
+  .evidence-block a:hover { text-decoration: underline; }
+
+  .plain-note { font-size: 0.85rem; color: var(--muted); line-height: 1.7; max-width: 640px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#case-studies">Case Studies</a></li>
+    <li><a href="technical-work.html" class="active">Technical Work</a></li>
+    <li><a href="index.html#certifications">Certifications</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="tw-header">
+  <div class="tw-header-inner">
+    <h1>Technical Work</h1>
+    <p>The wider set of technologies and platforms I work with day to day, beyond the four flagship case studies. Where a category has a documented case study behind it, it's linked directly. Where it doesn't yet, it's listed honestly as professional experience without an evidence claim attached.</p>
+  </div>
+</div>
+
+<div class="tw-category" id="networking" style="border-top:none;">
+  <div class="tw-cat-head">
+    <div class="tw-cat-title">Networking</div>
+    <span class="tag tag-production">Production</span>
+  </div>
+  <div class="tw-cat-tech-list">Cisco Switching &amp; Routing · Fortinet FortiGate · MikroTik · Aruba · D-Link · VLANs · VPN (IPSec/SSL) · OSPF/BGP · QoS · Enterprise Wi-Fi · TCP/IP</div>
+  <div class="evidence-block">
+    <div class="evidence-block-label">Documented Evidence</div>
+    <p>A multi-site remote-access failure — diagnosed down to an empty access-control policy causing a "connected but no traffic" state — plus a related Wi-Fi SSID consolidation across sites, is written up as a full case study.</p>
+    <a href="case-studies/network-reliability.html">Read the Network Reliability case study →</a>
+  </div>
+</div>
+
+<div class="tw-category" id="microsoft">
+  <div class="tw-cat-head">
+    <div class="tw-cat-title">Microsoft</div>
+    <span class="tag tag-production">Production</span>
+  </div>
+  <div class="tw-cat-tech-list">Microsoft 365 · Exchange Online · Microsoft Entra ID (Azure AD) · Microsoft Intune · Microsoft Defender · Active Directory · Group Policy · Windows Server · DNS · DHCP · PowerShell</div>
+  <p class="plain-note">Administered day to day as part of current and prior IT infrastructure roles — user lifecycle management, device compliance policy, endpoint security policy, and directory services across multi-site environments. Referenced on my CV and LinkedIn profile.</p>
+</div>
+
+<div class="tw-category" id="backup">
+  <div class="tw-cat-head">
+    <div class="tw-cat-title">Backup &amp; Infrastructure</div>
+    <span class="tag tag-production">Production</span>
+  </div>
+  <div class="tw-cat-tech-list">Synology / QNAP NAS · Local &amp; Cloud Replication · Disaster Recovery · Hyper-V · VMware ESXi · RAID</div>
+  <div class="evidence-block">
+    <div class="evidence-block-label">Documented Evidence</div>
+    <p>A backup architecture rebuild that cut recovery time by 35%, a resolved ACL-inheritance fault on the same platform, and a deliberate tunnel-based exposure decision for a hosted VM, are all covered in the case study below.</p>
+    <a href="case-studies/backup-dr.html">Read the Backup &amp; Disaster Recovery case study →</a>
+  </div>
+</div>
+
+<div class="tw-category" id="automation">
+  <div class="tw-cat-head">
+    <div class="tw-cat-title">Automation &amp; Integration</div>
+    <span class="tag tag-production">Production</span>
+  </div>
+  <div class="tw-cat-tech-list">PowerShell · Microsoft Power Automate · n8n · REST API Integration</div>
+  <div class="evidence-block">
+    <div class="evidence-block-label">Documented Evidence</div>
+    <p>The clearest evidence of how I work with third-party integrations and automation is the structured testing and vendor-accountability process I ran on a recent platform rollout — tracked item by item across multiple verification rounds.</p>
+    <a href="case-studies/vendor-integration.html">Read the Vendor Integration case study →</a>
+  </div>
+  <p class="plain-note" style="margin-top:1rem;">PowerShell, Power Automate, and n8n are also used for day-to-day administrative automation as referenced on my CV.</p>
+</div>
+
+<div class="tw-category" id="security">
+  <div class="tw-cat-head">
+    <div class="tw-cat-title">Security</div>
+    <span class="tag tag-production">Production</span>
+  </div>
+  <div class="tw-cat-tech-list">SPF / DKIM / DMARC · Microsoft Defender · MFA &amp; Conditional Access · Endpoint Security · Network Segmentation · Access Control</div>
+  <p class="plain-note">Email authentication (SPF/DKIM/DMARC) and endpoint security policy are part of my current infrastructure ownership, as referenced on my CV. A deliberate security decision I can show in detail — choosing tunnel-based reachability over open inbound ports for a hosted service — is documented in the Backup &amp; Disaster Recovery case study.</p>
+  <div class="evidence-block" style="margin-top:1rem;">
+    <div class="evidence-block-label">Documented Evidence</div>
+    <p>Exposure-reduction decision for a NAS-hosted VM, made as part of the backup platform's security posture.</p>
+    <a href="case-studies/backup-dr.html">Read the Backup &amp; Disaster Recovery case study →</a>
+  </div>
+</div>
+
+<footer><p>© 2026 <span>Ihsan Ullah</span> · IT Infrastructure Engineer | Network Engineer | Microsoft 365 Administrator · Abu Dhabi, UAE</p></footer>
+
+</body>
+</html>
